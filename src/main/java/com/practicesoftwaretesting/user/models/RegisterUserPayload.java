@@ -1,4 +1,4 @@
-package com.practicesoftwaretesting;
+package com.practicesoftwaretesting.user.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

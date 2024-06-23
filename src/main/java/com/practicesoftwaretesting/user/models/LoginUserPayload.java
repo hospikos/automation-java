@@ -1,4 +1,4 @@
-package com.practicesoftwaretesting;
+package com.practicesoftwaretesting.user.models;
 
 import lombok.Builder;
 import lombok.Data;
