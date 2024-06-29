@@ -1,31 +1,39 @@
 package com.practicesoftwaretesting.user;
 
 import com.practicesoftwaretesting.common.BaseController;
+import com.practicesoftwaretesting.common.ResponseDecorator;
+import com.practicesoftwaretesting.user.models.LoginResponse;
 import com.practicesoftwaretesting.user.models.LoginUserPayload;
+import com.practicesoftwaretesting.user.models.RegisterResponse;
 import com.practicesoftwaretesting.user.models.RegisterUserPayload;
-import io.restassured.response.Response;
 
 public class UserController extends BaseController {
 
-    public Response registerUser(RegisterUserPayload registerUserPayload) {
-        return baseClient()
-                .body(registerUserPayload)
-                .when()
-                .post("/users/register");
+    public ResponseDecorator<RegisterResponse> registerUser(RegisterUserPayload registerUserPayload) {
+        return new ResponseDecorator<>(
+                baseClient()
+                        .body(registerUserPayload)
+                        .post("/users/register"),
+                RegisterResponse.class
+        );
     }
 
-    public Response loginUser(LoginUserPayload loginUserPayload) {
-        return baseClient()
-                .body(loginUserPayload)
-                .when()
-                .post("/users/login");
+    public ResponseDecorator<LoginResponse> loginUser(LoginUserPayload loginUserPayload) {
+        return new ResponseDecorator<>(
+                baseClient()
+                        .body(loginUserPayload)
+                        .post("/users/login"),
+                LoginResponse.class
+        );
     }
 
-    public Response deleteUser(String userId, String token) {
-        return baseClient()
-                .header("Authorization", "Bearer " + token)
-                .delete("/users/" + userId);
+    public ResponseDecorator<Void> deleteUser(String userId, String token) {
+        return new ResponseDecorator<>(
+                baseClient()
+                        .header("Authorization", "Bearer " + token)
+                        .delete("users/" + userId),
+                Void.class
+        );
     }
-
 }
 

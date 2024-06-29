@@ -2,18 +2,17 @@ package com.practicesoftwaretesting;
 
 import com.github.javafaker.Faker;
 import com.practicesoftwaretesting.user.*;
+import com.practicesoftwaretesting.user.assertion.LoginResponseAsserts;
+import com.practicesoftwaretesting.user.assertion.RegisterUserResponseAsserts;
 import com.practicesoftwaretesting.user.models.LoginResponse;
 import com.practicesoftwaretesting.user.models.LoginUserPayload;
-import com.practicesoftwaretesting.user.models.RegisterResponse;
 import com.practicesoftwaretesting.user.models.RegisterUserPayload;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-public class UserTest extends BaseTest{
+public class UserTest extends BaseTest {
 
     private String userEmail;
-    private static final String USER_PASSWORD = "12Example#";
+    private static final String DEFAULT_PASSWORD = "12Example#";
     UserController userController = new UserController();
 
     @Test
@@ -21,21 +20,29 @@ public class UserTest extends BaseTest{
 
         userEmail = getUserEmail();
         //Registration
-        RegisterUserPayload registerUserPayload = buildUser();
-        RegisterResponse registerResponse = userController.registerUser(registerUserPayload)
-                .then()
-                .statusCode(201)
-                .extract()
-                .as(RegisterResponse.class);
-        assertNotNull(registerResponse.getId());
+        var expectedUser = buildUser(userEmail);
+        var registerUserResponse = userController.registerUser(expectedUser)
+                .assertStatusCode(201)
+                .as();
+        new RegisterUserResponseAsserts(registerUserResponse)
+                .createdAtIsNotNull()
+                .firstNameIs(expectedUser.getFirstName())
+                .lastNameIs(expectedUser.getLastName())
+                .countryIs(expectedUser.getCountry())
+                .phoneIs(expectedUser.getPhone())
+                .cityIs(expectedUser.getCity())
+                .addressIs(expectedUser.getAddress());
 
         //UserLogin
         LoginUserPayload loginUserPayload = LoginUserPayload.builder()
                 .email(userEmail)
-                .password("12Example#")
+                .password(DEFAULT_PASSWORD)
                 .build();
-        LoginResponse loginUserResponse = loginUser(loginUserPayload);
-        assertNotNull(loginUserResponse.getAccessToken());
+        LoginResponse userLoginResponse = loginUser(loginUserPayload);
+        new LoginResponseAsserts(userLoginResponse)
+                .isNotExpired()
+                .accessTokenIsNotNull()
+                .tokenTypeIs("bearer");
 
         //AdminLogin
         LoginUserPayload adminSignIn = LoginUserPayload.builder()
@@ -45,23 +52,20 @@ public class UserTest extends BaseTest{
         LoginResponse loginAdminResponse = loginUser(adminSignIn);
 
         //Delete
-        var userId = registerResponse.getId();
+        var userId = registerUserResponse.getId();
         var token = loginAdminResponse.getAccessToken();
         System.out.println(userId);
         userController.deleteUser(userId, token)
-                .then()
-                .statusCode(204);
+                .assertStatusCode(204);
     }
 
     private LoginResponse loginUser(LoginUserPayload loginUserPayload) {
         return userController.loginUser(loginUserPayload)
-                .then()
-                .statusCode(200)
-                .extract()
-                .as(LoginResponse.class);
+                .assertStatusCode(200)
+                .as();
     }
 
-    private RegisterUserPayload buildUser() {
+    private RegisterUserPayload buildUser(String userEmail) {
         return RegisterUserPayload.builder()
                 .firstName("Johne")
                 .lastName("Lennone")
@@ -72,8 +76,8 @@ public class UserTest extends BaseTest{
                 .postcode("1234AA")
                 .phone("0987654321")
                 .dob("1941-01-01")
-                .password(USER_PASSWORD)
-                .email(userEmail)
+                .password(DEFAULT_PASSWORD)
+                .email(this.userEmail)
                 .build();
     }
 
