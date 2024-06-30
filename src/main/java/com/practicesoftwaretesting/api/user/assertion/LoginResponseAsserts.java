@@ -1,6 +1,6 @@
-package com.practicesoftwaretesting.user.assertion;
+package com.practicesoftwaretesting.api.user.assertion;
 
-import com.practicesoftwaretesting.user.models.LoginResponse;
+import com.practicesoftwaretesting.api.user.models.LoginResponse;
 import lombok.AllArgsConstructor;
 
 import static org.assertj.core.api.Assertions.assertThat;

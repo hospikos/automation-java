@@ -1,12 +1,12 @@
-package com.practicesoftwaretesting;
+package com.practicesoftwaretesting.api;
 
 import com.github.javafaker.Faker;
-import com.practicesoftwaretesting.user.*;
-import com.practicesoftwaretesting.user.assertion.LoginResponseAsserts;
-import com.practicesoftwaretesting.user.assertion.RegisterUserResponseAsserts;
-import com.practicesoftwaretesting.user.models.LoginResponse;
-import com.practicesoftwaretesting.user.models.LoginUserPayload;
-import com.practicesoftwaretesting.user.models.RegisterUserPayload;
+import com.practicesoftwaretesting.api.user.UserController;
+import com.practicesoftwaretesting.api.user.assertion.LoginResponseAsserts;
+import com.practicesoftwaretesting.api.user.assertion.RegisterUserResponseAsserts;
+import com.practicesoftwaretesting.api.user.models.LoginResponse;
+import com.practicesoftwaretesting.api.user.models.LoginUserPayload;
+import com.practicesoftwaretesting.api.user.models.RegisterUserPayload;
 import org.junit.jupiter.api.Test;
 
 public class UserTest extends BaseTest {

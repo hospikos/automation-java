@@ -1,6 +1,6 @@
-package com.practicesoftwaretesting.user.assertion;
+package com.practicesoftwaretesting.api.user.assertion;
 
-import com.practicesoftwaretesting.user.models.RegisterResponse;
+import com.practicesoftwaretesting.api.user.models.RegisterResponse;
 
 import lombok.AllArgsConstructor;
 

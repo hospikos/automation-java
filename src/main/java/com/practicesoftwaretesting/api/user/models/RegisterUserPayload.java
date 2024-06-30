@@ -1,10 +1,15 @@
-package com.practicesoftwaretesting.user.models;
+package com.practicesoftwaretesting.api.user.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class RegisterResponse {
+@Builder
+public class RegisterUserPayload {
+    @JsonProperty("first_name")
     private String firstName;
+    @JsonProperty("last_name")
     private String lastName;
     private String address;
     private String city;
@@ -13,7 +18,6 @@ public class RegisterResponse {
     private String postcode;
     private String phone;
     private String dob;
+    private String password;
     private String email;
-    private String id;
-    private String createdAt;
 }

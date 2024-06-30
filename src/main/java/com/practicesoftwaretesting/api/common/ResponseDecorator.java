@@ -1,4 +1,4 @@
-package com.practicesoftwaretesting.common;
+package com.practicesoftwaretesting.api.common;
 
 import io.restassured.response.Response;
 

@@ -1,7 +1,8 @@
-package com.practicesoftwaretesting;
+package com.practicesoftwaretesting.api;
 
-import com.practicesoftwaretesting.cart.CartController;
-import com.practicesoftwaretesting.cart.models.*;
+import com.practicesoftwaretesting.api.cart.CartController;
+import com.practicesoftwaretesting.api.cart.models.AddCartItemRequest;
+import com.practicesoftwaretesting.api.cart.models.CartItem;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CartTest extends BaseTest {
 
-    private static final String PRODUCT_ID = "01J1JF15DGXK883V8S7JVXK3GH";
+    private static final String PRODUCT_ID = "01J1MQ4A3KX7JBXHSTA8CY031Q";
 
     CartController cartController = new CartController();
 
