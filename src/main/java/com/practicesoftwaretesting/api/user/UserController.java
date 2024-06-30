@@ -1,11 +1,11 @@
-package com.practicesoftwaretesting.user;
+package com.practicesoftwaretesting.api.user;
 
-import com.practicesoftwaretesting.common.BaseController;
-import com.practicesoftwaretesting.common.ResponseDecorator;
-import com.practicesoftwaretesting.user.models.LoginResponse;
-import com.practicesoftwaretesting.user.models.LoginUserPayload;
-import com.practicesoftwaretesting.user.models.RegisterResponse;
-import com.practicesoftwaretesting.user.models.RegisterUserPayload;
+import com.practicesoftwaretesting.api.user.models.LoginResponse;
+import com.practicesoftwaretesting.api.user.models.LoginUserPayload;
+import com.practicesoftwaretesting.api.common.BaseController;
+import com.practicesoftwaretesting.api.common.ResponseDecorator;
+import com.practicesoftwaretesting.api.user.models.RegisterResponse;
+import com.practicesoftwaretesting.api.user.models.RegisterUserPayload;
 
 public class UserController extends BaseController {
 

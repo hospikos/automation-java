@@ -1,12 +1,11 @@
-package com.practicesoftwaretesting.cart;
+package com.practicesoftwaretesting.api.cart;
 
-import com.practicesoftwaretesting.cart.models.AddCartItemRequest;
-import com.practicesoftwaretesting.cart.models.CartDetails;
-import com.practicesoftwaretesting.cart.models.CreateCartResponse;
-import com.practicesoftwaretesting.cart.models.UpdateCartResponse;
-import com.practicesoftwaretesting.common.BaseController;
-import com.practicesoftwaretesting.common.ResponseDecorator;
-import io.restassured.response.Response;
+import com.practicesoftwaretesting.api.cart.models.AddCartItemRequest;
+import com.practicesoftwaretesting.api.cart.models.CartDetails;
+import com.practicesoftwaretesting.api.cart.models.CreateCartResponse;
+import com.practicesoftwaretesting.api.cart.models.UpdateCartResponse;
+import com.practicesoftwaretesting.api.common.BaseController;
+import com.practicesoftwaretesting.api.common.ResponseDecorator;
 
 public class CartController extends BaseController {
 

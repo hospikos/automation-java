@@ -1,4 +1,4 @@
-package com.practicesoftwaretesting.common;
+package com.practicesoftwaretesting.api.common;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
