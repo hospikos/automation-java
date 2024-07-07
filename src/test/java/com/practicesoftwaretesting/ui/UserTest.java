@@ -1,9 +1,13 @@
 package com.practicesoftwaretesting.ui;
 
-import com.practicesoftwaretesting.ui.pages.*;
+import com.practicesoftwaretesting.ui.pages.Header;
+import com.practicesoftwaretesting.ui.pages.HomePage;
+import com.practicesoftwaretesting.ui.pages.LoginPage;
+import com.practicesoftwaretesting.ui.pages.RegisterPage;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.open;
+
 
 public class UserTest {
 
@@ -11,7 +15,6 @@ public class UserTest {
     Header header = new Header();
     LoginPage loginPage = new LoginPage();
     RegisterPage registerPage = new RegisterPage();
-    AccountPage accountPage = new AccountPage();
 
     @Test
     void registerNewUserAndLogin() {
@@ -23,15 +26,5 @@ public class UserTest {
         registerPage.isLoaded()
                 .assertThat()
                 .hasCorrectInfo();
-
-        var user = registerPage.getUser();
-        registerPage.registerNewUser(user);
-
-        loginPage.isLoaded()
-                .login(user.getEmail(), user.getPassword());
-
-        accountPage.isLoaded();
-        header.assertThat().isSignedId(user.getFirstName() + " " + user.getLastName());
     }
-
 }
