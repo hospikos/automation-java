@@ -7,13 +7,17 @@ import com.practicesoftwaretesting.api.user.assertion.RegisterUserResponseAssert
 import com.practicesoftwaretesting.api.user.models.LoginResponse;
 import com.practicesoftwaretesting.api.user.models.LoginUserPayload;
 import com.practicesoftwaretesting.api.user.models.RegisterUserPayload;
+import com.practicesoftwaretesting.utils.ConfigReader;
 import org.junit.jupiter.api.Test;
 
 public class UserTest extends BaseTest {
 
     private String userEmail;
-    private static final String DEFAULT_PASSWORD = "12Example#";
     UserController userController = new UserController();
+    ConfigReader configReader = new ConfigReader();
+    String adminEmail = configReader.getProperty("admin.email");
+    String adminPassword = configReader.getProperty("admin.password");
+    String defaultPassword = configReader.getProperty("default.password");
 
     @Test
     void testUser() {
@@ -36,7 +40,7 @@ public class UserTest extends BaseTest {
         //UserLogin
         LoginUserPayload loginUserPayload = LoginUserPayload.builder()
                 .email(userEmail)
-                .password(DEFAULT_PASSWORD)
+                .password(defaultPassword)
                 .build();
         LoginResponse userLoginResponse = loginUser(loginUserPayload);
         new LoginResponseAsserts(userLoginResponse)
@@ -46,8 +50,8 @@ public class UserTest extends BaseTest {
 
         //AdminLogin
         LoginUserPayload adminSignIn = LoginUserPayload.builder()
-                .email("admin@practicesoftwaretesting.com")
-                .password("welcome01")
+                .email(adminEmail)
+                .password(adminPassword)
                 .build();
         LoginResponse loginAdminResponse = loginUser(adminSignIn);
 
@@ -76,7 +80,7 @@ public class UserTest extends BaseTest {
                 .postcode("1234AA")
                 .phone("0987654321")
                 .dob("1941-01-01")
-                .password(DEFAULT_PASSWORD)
+                .password(defaultPassword)
                 .email(this.userEmail)
                 .build();
     }

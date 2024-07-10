@@ -1,16 +1,17 @@
 package com.practicesoftwaretesting.api.common;
 
+import com.practicesoftwaretesting.utils.ConfigReader;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
 public abstract class BaseController {
 
-    private static final String BASE_URI = "https://api.practicesoftwaretesting.com";
+    private final ConfigReader configReader = new ConfigReader();
 
     protected RequestSpecification baseClient() {
         return RestAssured.given()
-                .baseUri(BASE_URI)
+                .baseUri(configReader.getProperty("base.api.url"))
                 .contentType(ContentType.JSON);
     }
 

@@ -1,5 +1,6 @@
 package com.practicesoftwaretesting.ui.pages;
 
+import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -26,5 +27,10 @@ public class HomePage {
 
     public void clockOnBoltCuttersItem() {
         $(BOLT_CUTTERS_ITEM).click();
+    }
+
+    public HomePage open() {
+        Selenide.open("/");
+        return this;
     }
 }
