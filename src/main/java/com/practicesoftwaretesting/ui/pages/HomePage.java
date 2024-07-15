@@ -25,7 +25,7 @@ public class HomePage {
         $$(PRODUCT_CARDS).first().click();
     }
 
-    public void clockOnBoltCuttersItem() {
+    public void clickOnBoltCuttersItem() {
         $(BOLT_CUTTERS_ITEM).click();
     }
 

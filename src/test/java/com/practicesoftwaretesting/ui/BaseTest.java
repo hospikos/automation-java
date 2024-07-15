@@ -1,6 +1,7 @@
 package com.practicesoftwaretesting.ui;
 
 import com.codeborne.selenide.Configuration;
+import com.practicesoftwaretesting.api.user.UserSteps;
 import com.practicesoftwaretesting.ui.pages.AccountPage;
 import com.practicesoftwaretesting.ui.pages.HomePage;
 import com.practicesoftwaretesting.ui.pages.LoginPage;
@@ -16,9 +17,11 @@ public abstract class BaseTest {
     RegisterPage registerPage = new RegisterPage();
     AccountPage accountPage = new AccountPage();
     HomePage homePage = new HomePage();
+    UserSteps userSteps = new UserSteps();
     static ConfigReader configReader = new ConfigReader();
     String adminEmail = configReader.getProperty("admin.email");
     String adminPassword = configReader.getProperty("admin.password");
+    String defaultPassword = configReader.getProperty("default.password");
 
     static {
         Configuration.baseUrl = configReader.getProperty("base.url");
@@ -47,12 +50,25 @@ public abstract class BaseTest {
         homePage.open();
     }
 
+    public void loginAsUser(String email, String password) {
+        loginPage.open()
+                .isLoaded()
+                .login(email, password);
+
+        accountPage.isLoaded();
+        homePage.open();
+    }
+
     public void loginAsAdmin() {
         loginPage.open()
                 .isLoaded()
                 .login(adminEmail, adminPassword);
 
         accountPage.isLoaded();
+    }
+
+    public void deleteUser(String userId) {
+        userSteps.deleteUser(userId);
     }
 
     @AfterEach

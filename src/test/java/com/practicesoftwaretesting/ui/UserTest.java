@@ -1,5 +1,6 @@
 package com.practicesoftwaretesting.ui;
 
+import com.practicesoftwaretesting.api.user.UserSteps;
 import com.practicesoftwaretesting.ui.pages.*;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +11,7 @@ public class UserTest extends BaseTest {
     LoginPage loginPage = new LoginPage();
     RegisterPage registerPage = new RegisterPage();
     AccountPage accountPage = new AccountPage();
+
 
     @Test
     void registerNewUserAndLogin() {
