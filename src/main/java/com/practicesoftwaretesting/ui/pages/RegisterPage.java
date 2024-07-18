@@ -1,8 +1,10 @@
 package com.practicesoftwaretesting.ui.pages;
 
+import com.codeborne.selenide.Selenide;
 import com.github.javafaker.Faker;
 import com.practicesoftwaretesting.api.user.models.RegisterUserPayload;
 import com.practicesoftwaretesting.ui.asserts.RegisterPageAsserts;
+import com.practicesoftwaretesting.utils.ConfigReader;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
@@ -12,6 +14,8 @@ import static com.practicesoftwaretesting.ui.utils.SelectorUtils.byDataTest;
 import static com.practicesoftwaretesting.ui.utils.SelectorUtils.byFor;
 
 public class RegisterPage {
+
+    ConfigReader configReader = new ConfigReader();
 
     protected static final By FIRST_NAME_LABEL = byFor("first_name");
     protected static final By FIRST_NAME_INPUT = byId("first_name");
@@ -36,6 +40,7 @@ public class RegisterPage {
     protected static final By PASSWORD_LABEL = byFor("password");
     protected static final By PASSWORD_INPUT = byId("password");
     protected static final By REGISTER_BUTTON = byDataTest("register-submit");
+    String defaultPassword = configReader.getProperty("default.password");
 
     public RegisterPage isLoaded() {
         $("h3").shouldHave(text("Customer registration"));
@@ -73,7 +78,7 @@ public class RegisterPage {
                 .phone("123456677")
                 .dob("01/01/1946")
                 .email(this.getUserEmail())
-                .password("12Example#")
+                .password(defaultPassword)
                 .build();
     }
 
@@ -83,5 +88,10 @@ public class RegisterPage {
                 .character()
                 .toLowerCase()
                 .replaceAll(" ", "") + "@gmail.com";
+    }
+
+    public RegisterPage open() {
+        Selenide.open("/auth/register");
+        return this;
     }
 }

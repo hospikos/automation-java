@@ -20,7 +20,7 @@ public class Header {
         return new HeaderAsserts();
     }
 
-    public void clockCartMenuItem() {
+    public void clickCartMenuItem() {
         $(CART).click();
     }
 }

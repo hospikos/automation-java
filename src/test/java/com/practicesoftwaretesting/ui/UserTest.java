@@ -1,11 +1,10 @@
 package com.practicesoftwaretesting.ui;
 
+import com.practicesoftwaretesting.api.user.UserSteps;
 import com.practicesoftwaretesting.ui.pages.*;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selenide.open;
-
-public class UserTest {
+public class UserTest extends BaseTest {
 
     HomePage homePage = new HomePage();
     Header header = new Header();
@@ -13,10 +12,11 @@ public class UserTest {
     RegisterPage registerPage = new RegisterPage();
     AccountPage accountPage = new AccountPage();
 
+
     @Test
     void registerNewUserAndLogin() {
-        open("https://practicesoftwaretesting.com/#/");
-        homePage.isLoaded();
+        homePage.open()
+                .isLoaded();
         header.clickSignInMenuItem();
         loginPage.isLoaded()
                 .clickRegisterYourAccount();
@@ -33,5 +33,4 @@ public class UserTest {
         accountPage.isLoaded();
         header.assertThat().isSignedId(user.getFirstName() + " " + user.getLastName());
     }
-
 }
